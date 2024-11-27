@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Home",
+        "url": "home.php"
+    },
+    {
+        "id": 2,
+        "name": "Add Item",
+        "url": "addItem.php"
+    },
+    {
+        "id": 3,
+        "name": "Login",
+        "url": "login.php?state=login"
+    },
+    {
+        "id": 4,
+        "name": "Logout",
+        "url": "login.php?state=logout"
+    }
+]
