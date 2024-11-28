@@ -1,0 +1,58 @@
+@import 'configParam';
+main{
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $main_bg_color;
+
+    form{
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+        width: 90%;
+        background-color: $navBar_bg_color;
+        padding: 40px;
+        border-radius: 20px;
+
+        input{
+            margin-bottom: 5vh;
+            color: $navBar_color;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: black;
+            border: 1px solid $navBar_color;
+        }
+
+        label{
+            color: $navBar_color;
+            margin-bottom: 1vh;
+        }
+
+        button{
+            width: 50%;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 0 auto;
+            background-color: black;
+            color: $navBar_color;
+            border-color: $navBar_color;
+
+            &:hover{
+                background-color: $navBar_color;
+                color: black;
+                cursor: pointer;
+            }
+
+            &:disabled{
+                color: rgb(107, 107, 107);
+                background-color: rgb(194, 194, 194);
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+
+

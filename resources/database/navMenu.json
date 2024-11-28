@@ -2,21 +2,21 @@
     {
         "id": 1,
         "name": "Home",
-        "url": "home.php"
+        "url": "home.php?selected=1"
     },
     {
         "id": 2,
         "name": "Add Item",
-        "url": "addItem.php"
+        "url": "addItem.php?selected=2"
     },
     {
         "id": 3,
         "name": "Login",
-        "url": "login.php?state=login"
+        "url": "login.php?state=login&selected=3"
     },
     {
         "id": 4,
         "name": "Logout",
-        "url": "login.php?state=logout"
+        "url": "login.php?state=logout&selected=4"
     }
 ]

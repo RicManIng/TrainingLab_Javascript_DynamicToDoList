@@ -8,7 +8,7 @@
 <body>
     <main>
         <h1>Welcome to your family management system</h1>
-        <a href="login.php?state=login">Start Now</a>
+        <a href="login.php?state=login&selected=3">Start Now</a>
     </main>
 </body>
 </html>

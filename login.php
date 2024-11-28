@@ -34,19 +34,21 @@
         <?php if (isset($_GET['state']) && $_GET['state'] === 'login') : ?>
         <form action="login.php?state=login" method="POST" novalidate>
             <label for="username">Username : </label>
-            <input type="text" name="username" id="username" required>
+            <input type="text" name="username" id="username" required placeholder="insert here your username">
             <label for="password">Password : </label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" required placeholder="insert here your password">
             <?php if(!$form_validated) : ?>
                 <p class="error">Invalid Username or Password</p>
             <?php endif; ?>
             <button type="submit" id="submit" disabled>Login</button>
         </form>
         <?php elseif (isset($_GET['state']) && $_GET['state'] === 'logout') : ?>
-            <?php $_SESSION['username'] = null; ?>
+        <?php $_SESSION['username'] = null; ?>
+        <section>
             <h1>Logout Success</h1>
             <p>Login again to modify tasks</p>
             <a href="login.php?state=login">Go to Login</a>
+        </section>
         <?php endif; ?>
     </main>
 </body>
