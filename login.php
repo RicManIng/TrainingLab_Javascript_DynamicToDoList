@@ -32,11 +32,11 @@
     ?>
     <main>
         <?php if (isset($_GET['state']) && $_GET['state'] === 'login') : ?>
-        <form action="login.php?state=login" method="POST" novalidate>
+        <form action="login.php?state=login&selected=3" method="POST" novalidate>
             <label for="username">Username : </label>
-            <input type="text" name="username" id="username" required placeholder="insert here your username">
+            <input type="text" name="username" id="username" required placeholder="insert here your username" autocomplete="off">
             <label for="password">Password : </label>
-            <input type="password" name="password" id="password" required placeholder="insert here your password">
+            <input type="password" name="password" id="password" required placeholder="insert here your password" autocomplete="off">
             <?php if(!$form_validated) : ?>
                 <p class="error">Invalid Username or Password</p>
             <?php endif; ?>
@@ -47,7 +47,7 @@
         <section>
             <h1>Logout Success</h1>
             <p>Login again to modify tasks</p>
-            <a href="login.php?state=login">Go to Login</a>
+            <a href="login.php?state=login&selected=3">Go to Login</a>
         </section>
         <?php endif; ?>
     </main>
