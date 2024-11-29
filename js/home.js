@@ -6,12 +6,30 @@ async function loadTasks() {
     return tasks;
 }
 
+async function loadTaskTypes() {
+    // Load tasks from local storage
+    let menuUrl = './resources/database/taskTypes.json';
+    let response = await fetch(menuUrl);
+    let taskTypes = await response.json();
+    return taskTypes;
+}
+
 function sortByDeletedAt(array) {
     return array.sort((a, b) => {
         const dateA = new Date(a.deleted_at);
         const dateB = new Date(b.deleted_at);
         return dateA - dateB; // Ordine crescente: dal più vecchio al più recente
     });
+}
+
+function clearTasks() {
+    let taskContainers = document.getElementsByClassName('taskContainer');
+    for (let taskContainer of taskContainers) {
+        let tasks = taskContainer.getElementsByClassName('task');
+        while (tasks.length > 0) {
+            tasks[0].parentNode.removeChild(tasks[0]);
+        }
+    }
 }
 
 function createTask(task) {
@@ -104,6 +122,13 @@ function createStandardView(taskArray) {
                     createTask(task);
                     counter++;
                 }
+                let button = document.createElement('button');
+                button.textContent = 'Show More';
+                button.id = 'showMorePengins';
+                button.addEventListener('click', function() {
+                    /* clearTasks();
+                    createStandardView(pendings); */
+                });
             } else if (containerClass == 'completed') {
                 for (let task of completeds) {
                     if(counter == 5){
@@ -112,6 +137,13 @@ function createStandardView(taskArray) {
                     createTask(task);
                     counter++;
                 }
+                let button1 = document.createElement('button');
+                button1.textContent = 'Show More';
+                button1.id = 'showMoreCompleted';
+                button1.addEventListener('click', function() {
+                    /* clearTasks();
+                    createStandardView(pendings); */
+                });
             } else if (containerClass == 'cancelled') {
                 for (let task of cancelleds) {
                     if(counter == 5){
@@ -120,13 +152,29 @@ function createStandardView(taskArray) {
                     createTask(task);
                     counter++;
                 }
+                let button2 = document.createElement('button');
+                button2.textContent = 'Show More';
+                button2.id = 'showMoreCancelled';
+                button2.addEventListener('click', function() {
+                    /* clearTasks();
+                    createStandardView(pendings); */
+                });
             }
         }
     }
-
 }
 
-function addTasksToMenu(menuType, taskArray) {
+function createSearchMenuSelect(taskTypes) {
+    let select = document.querySelector('select#select');
+    for (let taskType of taskTypes) {
+        let option = document.createElement('option');
+        option.value = taskType.name;
+        option.textContent = taskType.name;
+        select.appendChild(option);
+    }
+}
+
+/* function addTasksToMenu(menuType, taskArray) {
     let taskList = document.querySelector('ul#taskList');
     taskList.innerHTML = '';
     if(menuType == 'standard') {
@@ -134,15 +182,32 @@ function addTasksToMenu(menuType, taskArray) {
     } else {
         createStandardView(taskArray);
     }
+} */
+
+function filterTasks(taskArray, filters) {
+    if(filters.type != '') {
+        taskArray = taskArray.filter(task => task.type == filters.type);
+    }
+    if(filters.search != '') {
+        taskArray = taskArray.filter(task => task.name.toLowerCase().includes(filters.search.toLowerCase()));
+    }
+    return taskArray;
 }
 
-function filterTasks(taskArray, filter) {
-    let filteredArray = taskArray.filter(task => task.name.includes(filter));
-    return filteredArray;
-}
 
-
-window.onload = function() {
-    let taskArray = loadTasks();
+window.onload = async function() {
+    let taskArray = await loadTasks();
+    let taskTypes = await loadTaskTypes();
+    let button = document.getElementById('searchButton');
     createStandardView(taskArray);
+    createSearchMenuSelect(taskTypes);
+    button.onclick = function() {
+        let select = document.querySelector('select#select');
+        let taskTypeId = select.value;
+        console.log(taskTypeId);
+        let searchString = document.querySelector('input#search').value;
+        let filteredArray = filterTasks(taskArray, {type : taskTypeId, search : searchString});
+        clearTasks();
+        createStandardView(filteredArray);
+    }
 }
