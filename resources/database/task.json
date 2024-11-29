@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "name": "Do the laundry",
+        "description": "Wash the clothes and hang them to dry",
+        "status": "pending",
+        "type": "home",
+        "created_at": "2021-09-01T12:00:00",
+        "updated_at": "2021-09-01T12:00:00",
+        "deleted_at": null,
+        "urgency": 2
+    },
+    {
+        "id": 2,
+        "name": "Send email to client",
+        "description": "Send the email to the client with the project details",
+        "status": "pending",
+        "type": "work",
+        "created_at": "2021-09-01",
+        "updated_at": "2021-09-01",
+        "deleted_at": null,
+        "urgency": 5
+    },
+    {
+        "id": 3,
+        "name": "Buy groceries",
+        "description": "Buy the groceries for the week",
+        "status": "pending",
+        "type": "home",
+        "created_at": "2021-09-01",
+        "updated_at": "2021-09-01",
+        "deleted_at": null,
+        "urgency": 3
+    },
+    {
+        "id": 4,
+        "name": "Prepare presentation",
+        "description": "Prepare the presentation for the meeting",
+        "status": "pending",
+        "type": "work",
+        "created_at": "2021-09-01",
+        "updated_at": "2021-09-01",
+        "deleted_at": null,
+        "urgency": 4
+    },
+    {
+        "id": 5,
+        "name": "Call mom",
+        "description": "Call mom and ask how she is doing",
+        "status": "completed",
+        "type": "personal",
+        "created_at": "2021-09-01",
+        "updated_at": "2021-09-01",
+        "deleted_at": "2021-09-01",
+        "urgency": 1
+    },
+    {
+        "id": 6,
+        "name": "Go to the gym",
+        "description": "Go to the gym and workout",
+        "status": "completed",
+        "type": "personal",
+        "created_at": "2021-09-00",
+        "updated_at": "2021-09-01",
+        "deleted_at": "2021-09-01",
+        "urgency": 1
+    },
+    {
+        "id": 7,
+        "name": "Read book",
+        "description": "Read the book for 30 minutes",
+        "status": "cancelled",
+        "type": "personal",
+        "created_at": "2021-09-01",
+        "updated_at": "2021-09-01",
+        "deleted_at": "2021-09-01",
+        "urgency": 1
+    },
+    {
+        "id": 8,
+        "name": "Finish project",
+        "description": "Finish the project and submit it",
+        "status": "completed",
+        "type": "work",
+        "created_at": "2021-09-01",
+        "updated_at": "2021-09-01",
+        "deleted_at": "2021-09-01",
+        "urgency": 5
+    }
+]

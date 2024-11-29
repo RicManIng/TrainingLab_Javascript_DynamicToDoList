@@ -1,0 +1,50 @@
+[
+    {
+        "name": "home"
+    },
+    {
+        "name": "work"
+    },
+    {
+        "name": "school"
+    },
+    {
+        "name": "personal"
+    },
+    {
+        "name": "shopping"
+    },
+    {
+        "name": "health"
+    },
+    {
+        "name": "fitness"
+    },
+    {
+        "name": "finance"
+    },
+    {
+        "name": "social"
+    },
+    {
+        "name": "family"
+    },
+    {
+        "name": "travel"
+    },
+    {
+        "name": "entertainment"
+    },
+    {
+        "name": "spiritual"
+    },
+    {
+        "name": "hobby"
+    },
+    {
+        "name": "volunteer"
+    },
+    {
+        "name": "other"
+    }
+]
