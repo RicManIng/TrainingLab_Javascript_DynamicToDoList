@@ -18,18 +18,39 @@ function sortByDeletedAt(array) {
     return array.sort((a, b) => {
         const dateA = new Date(a.deleted_at);
         const dateB = new Date(b.deleted_at);
-        return dateA - dateB; // Ordine crescente: dal più vecchio al più recente
+        return dateB - dateA;
     });
 }
 
-function clearTasks() {
-    let taskContainers = document.getElementsByClassName('taskContainer');
-    for (let taskContainer of taskContainers) {
+function clearTasks(taskType) {
+    if(taskType == null) {
+        let taskContainers = document.getElementsByClassName('taskContainer');
+        for (let taskContainer of taskContainers) {
+            let tasks = taskContainer.getElementsByClassName('task');
+            while (tasks.length > 0) {
+                tasks[0].parentNode.removeChild(tasks[0]);
+            }
+        }
+    } else if (taskType == 'pending') {
+        let taskContainer = document.querySelector('section#pending-task');
+        let tasks = taskContainer.getElementsByClassName('task');
+        while (tasks.length > 0) {
+            tasks[0].parentNode.removeChild(tasks[0]);
+        }
+    } else if (taskType == 'completed') {
+        let taskContainer = document.querySelector('section#completed-task');
+        let tasks = taskContainer.getElementsByClassName('task');
+        while (tasks.length > 0) {
+            tasks[0].parentNode.removeChild(tasks[0]);
+        }
+    } else if (taskType == 'cancelled') {
+        let taskContainer = document.querySelector('section#cancelled-task');
         let tasks = taskContainer.getElementsByClassName('task');
         while (tasks.length > 0) {
             tasks[0].parentNode.removeChild(tasks[0]);
         }
     }
+    
 }
 
 function createTask(task) {
@@ -65,6 +86,7 @@ function createTask(task) {
             divUrgency.classList.add('urgency');
             UrgencyContainer.appendChild(divUrgency);
         }
+        div.appendChild(UrgencyContainer);
     }
 
     let iconContainer = document.createElement('div');
@@ -91,13 +113,28 @@ function createTask(task) {
 
     if(task.status == 'pending'){
         let section = document.querySelector('section#pending-task');
-        section.appendChild(div);
+        let button = section.getElementsByClassName('showMore')[0];
+        if(button != null){
+            section.insertBefore(div, button);
+        } else {
+            section.appendChild(div);
+        }
     } else if (task.status == 'completed'){
         let section = document.querySelector('section#completed-task');
-        section.appendChild(div);
+        let button = section.getElementsByClassName('showMore')[0];
+        if(button != null){
+            section.insertBefore(div, button);
+        } else {
+            section.appendChild(div);
+        }
     } else {
         let section = document.querySelector('section#cancelled-task');
-        section.appendChild(div);
+        let button = section.getElementsByClassName('showMore')[0];
+        if(button != null){
+            section.insertBefore(div, button);
+        } else {
+            section.appendChild(div);
+        }
     }
 }
 
@@ -111,6 +148,7 @@ function createStandardView(taskArray) {
     cancelleds = sortByDeletedAt(cancelleds);
 
     for (let taskContainer of taskContainers) {
+        console.log(typeof(taskContainer));
         let counter = 0;
         const containerClasses = taskContainer.classList;
         for (let containerClass of containerClasses) {
@@ -124,11 +162,11 @@ function createStandardView(taskArray) {
                 }
                 let button = document.createElement('button');
                 button.textContent = 'Show More';
-                button.id = 'showMorePengins';
+                button.classList.add('showMore');
                 button.addEventListener('click', function() {
-                    /* clearTasks();
-                    createStandardView(pendings); */
+                    addTasksToMenu('pending', pendings);
                 });
+                taskContainer.appendChild(button);
             } else if (containerClass == 'completed') {
                 for (let task of completeds) {
                     if(counter == 5){
@@ -139,11 +177,11 @@ function createStandardView(taskArray) {
                 }
                 let button1 = document.createElement('button');
                 button1.textContent = 'Show More';
-                button1.id = 'showMoreCompleted';
+                button1.classList.add('showMore');
                 button1.addEventListener('click', function() {
-                    /* clearTasks();
-                    createStandardView(pendings); */
+                    addTasksToMenu('completed', completeds);
                 });
+                taskContainer.appendChild(button1);
             } else if (containerClass == 'cancelled') {
                 for (let task of cancelleds) {
                     if(counter == 5){
@@ -154,11 +192,11 @@ function createStandardView(taskArray) {
                 }
                 let button2 = document.createElement('button');
                 button2.textContent = 'Show More';
-                button2.id = 'showMoreCancelled';
+                button2.classList.add('showMore');
                 button2.addEventListener('click', function() {
-                    /* clearTasks();
-                    createStandardView(pendings); */
+                    addTasksToMenu('cancelled', cancelleds);
                 });
+                taskContainer.appendChild(button2);
             }
         }
     }
@@ -174,15 +212,31 @@ function createSearchMenuSelect(taskTypes) {
     }
 }
 
-/* function addTasksToMenu(menuType, taskArray) {
-    let taskList = document.querySelector('ul#taskList');
-    taskList.innerHTML = '';
-    if(menuType == 'standard') {
-        createStandardView(taskArray);
+function addTasksToMenu(taskType, taskArray) {
+    let Container = document.querySelector(`section#${taskType}-task`);
+    let task_count = Container.getElementsByClassName('task').length;
+    let counter = 0;
+    if (task_count%5 != 0){
+        let p = Container.getElementsByClassName('noMoreTasks')[0];
+        if (p != null){
+            p.parentNode.removeChild(p);
+        }
+        p = document.createElement('p');
+        p.textContent = 'No more tasks';
+        p.classList.add('noMoreTasks');
+        let button = Container.getElementsByClassName('showMore')[0];
+        Container.insertBefore(p, button);
     } else {
-        createStandardView(taskArray);
+        clearTasks(taskType);
+        for (let task of taskArray) {
+            if(counter == task_count + 5){
+                break;
+            }
+            createTask(task);
+            counter++;
+        }
     }
-} */
+}
 
 function filterTasks(taskArray, filters) {
     if(filters.type != '') {
@@ -207,7 +261,7 @@ window.onload = async function() {
         console.log(taskTypeId);
         let searchString = document.querySelector('input#search').value;
         let filteredArray = filterTasks(taskArray, {type : taskTypeId, search : searchString});
-        clearTasks();
+        clearTasks(null);
         createStandardView(filteredArray);
     }
 }
