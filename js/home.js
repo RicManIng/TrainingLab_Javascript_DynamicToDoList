@@ -87,29 +87,41 @@ function createTask(task) {
             UrgencyContainer.appendChild(divUrgency);
         }
         div.appendChild(UrgencyContainer);
+
+        let iconContainer = document.createElement('div');
+        iconContainer.classList.add('iconContainer');
+
+        let i3 = document.createElement('i');
+        i3.classList.add('fas');
+        i3.classList.add('fa-check');
+        i3.addEventListener('click', function() {
+            const editUrl = `addItem.php?id=${task.id}&state=complete`;
+            window.location.href=editUrl;
+        });
+        iconContainer.appendChild(i3);
+
+        let i1 = document.createElement('i');
+        i1.classList.add('fas');
+        i1.classList.add('fa-edit');
+        i1.addEventListener('click', function() {
+            const editUrl = `addItem.php?id=${task.id}&state=edit`;
+            window.location.href=editUrl;
+        });
+        iconContainer.appendChild(i1);
+
+        let i2 = document.createElement('i');
+        i2.classList.add('fas');
+        i2.classList.add('fa-trash');
+        i2.addEventListener('click', function() {
+            const editUrl = `addItem.php?id=${task.id}&state=delete`;
+            window.location.href=editUrl;
+        });
+        iconContainer.appendChild(i2);
+        div.appendChild(iconContainer);
+        
     }
 
-    let iconContainer = document.createElement('div');
-    iconContainer.classList.add('iconContainer');
-    let i1 = document.createElement('i');
-    i1.classList.add('fas');
-    i1.classList.add('fa-edit');
-    i1.addEventListener('click', function() {
-        const editUrl = `addItem.php?id=${task.id}&state=edit`;
-        window.location.href=editUrl;
-    });
-    iconContainer.appendChild(i1);
-
-    let i2 = document.createElement('i');
-    i2.classList.add('fas');
-    i2.classList.add('fa-trash');
-    i2.addEventListener('click', function() {
-        const editUrl = `addItem.php?id=${task.id}&state=delete`;
-        window.location.href=editUrl;
-    });
-    iconContainer.appendChild(i2);
-    div.appendChild(iconContainer);
-    div.classList.add('task');
+    div.classList.add('task');    
 
     if(task.status == 'pending'){
         let section = document.querySelector('section#pending-task');
@@ -263,5 +275,15 @@ window.onload = async function() {
         let filteredArray = filterTasks(taskArray, {type : taskTypeId, search : searchString});
         clearTasks(null);
         createStandardView(filteredArray);
+    }
+    let select = document.querySelector('select#select');
+    select.onchange = function(event) {
+        let selectedSelect = event.target;
+        let taskTypeId = selectedSelect.value;
+        if (taskTypeId != ''){
+            select.classList.add('selection');
+        } else {
+            select.classList.remove('selection');
+        }
     }
 }

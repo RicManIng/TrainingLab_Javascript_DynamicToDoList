@@ -17,7 +17,7 @@
                 <input type="text" id="search" name="search" placeholder="Insert the name of the task">
                 <label for="select">Select a type : </label>
                 <select name="taskType" id="select">
-                    <option value="">Select a task type to search</option>
+                    <option value="" class="default">Select a task type to search</option>
                 </select>
                 <button type="button" id="searchButton">Search</button>
             </form>
