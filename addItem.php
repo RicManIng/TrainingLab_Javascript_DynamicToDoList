@@ -92,7 +92,8 @@
                     <button type="button" class="urgency" id="5" <?= ($urgency == 5) ? 'selected' : '' ?>></button>
                 </div>
                 <label for="description">Insert here the task description : </label>
-                <textarea placeholder="Task description must be more than 20 characters"><?= htmlspecialchars($description); ?></textarea>
+                <textarea placeholder="Task description must be more than 20 characters" name="description" id="description" rows="10"><?= htmlspecialchars($description); ?></textarea>
+                <p id="descriprion-counter"></p>
                 <button type="submit" id="submit" name="formComplete" value="true" disabled>Save</button>
             </form>
         <?php endif; ?>

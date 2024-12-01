@@ -43,6 +43,7 @@ main{
     }
 
     form{
+        margin: 10vh 0;
         display: flex;
         flex-direction: column;
         width: 60%;
@@ -52,8 +53,12 @@ main{
         border-radius: 20px;
         background-color: $navBar_bg_color;
         
-        input, textarea, #urgencyContainer, select{
+        input, p, #urgencyContainer, select{
             margin-bottom: 5vh;
+        }
+
+        textarea{
+            margin-bottom: 1vh;
         }
 
         label{
@@ -76,8 +81,22 @@ main{
             }
         }
 
-        select{
+        select, #description-counter, p{
             color: darkgray
+        }
+
+        select{
+            option{
+                color: darkgray;
+
+                &.option-selection{
+                    color: $navBar_color;
+                }
+            }
+
+            &.full{
+                color: $navBar_color;
+            }
         }
 
         #urgencyContainer{
@@ -100,9 +119,35 @@ main{
                     background-color: $navBar_color;
                 }
 
+                &.semi-selected{
+                    background-color: $navBar_color_semi;
+                }
+
                 &:hover{
                     cursor: pointer;
                 }
+            }
+        }
+
+        #submit{
+            width: 40%;
+            padding: 10px;
+            margin: 0 auto;
+            border-radius: 10px;
+            background-color: black;
+            color: $navBar_color;
+            border: 1px solid $navBar_color;
+
+            &:hover{
+                background-color: $navBar_color;
+                color: black;
+                cursor: pointer;
+            }
+
+            &:disabled{
+                cursor: not-allowed;
+                background-color: darkgray;
+                color: black;
             }
         }
 
