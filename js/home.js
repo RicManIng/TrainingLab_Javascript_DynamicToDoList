@@ -95,7 +95,7 @@ function createTask(task) {
         i3.classList.add('fas');
         i3.classList.add('fa-check');
         i3.addEventListener('click', function() {
-            const editUrl = `addItem.php?id=${task.id}&state=complete`;
+            const editUrl = `addItem.php?id=${task.id}&state=complete&selected=2`;
             window.location.href=editUrl;
         });
         iconContainer.appendChild(i3);
@@ -104,7 +104,7 @@ function createTask(task) {
         i1.classList.add('fas');
         i1.classList.add('fa-edit');
         i1.addEventListener('click', function() {
-            const editUrl = `addItem.php?id=${task.id}&state=edit`;
+            const editUrl = `addItem.php?id=${task.id}&state=edit&selected=2`;
             window.location.href=editUrl;
         });
         iconContainer.appendChild(i1);
@@ -113,8 +113,10 @@ function createTask(task) {
         i2.classList.add('fas');
         i2.classList.add('fa-trash');
         i2.addEventListener('click', function() {
-            const editUrl = `addItem.php?id=${task.id}&state=delete`;
-            window.location.href=editUrl;
+            if (confirm(`Are you sure about deleting ${task.name}?`)) {
+                const editUrl = `addItem.php?id=${task.id}&state=delete&selected=2`;
+                window.location.href = editUrl;
+            }
         });
         iconContainer.appendChild(i2);
         div.appendChild(iconContainer);

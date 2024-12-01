@@ -22,7 +22,7 @@
             foreach($userArr as $user){
                 if($user['username'] === $username && $user['password'] === $password && $user['username'] !== null && $user['password'] !== null){ 
                     $_SESSION['username'] = $username;
-                    header('Location: home.php');
+                    header('Location: home.php?selected=1');
                 } else {
                     $form_validated = false;
                 }

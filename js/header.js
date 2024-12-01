@@ -2,7 +2,6 @@ let hamMenuClass = 'fas fa-bars';
 let closeMenuClass = 'fa-solid fa-x';
 const username = document.body.getAttribute('data-username');
 let idSel = queryString('selected');
-console.log(username);
 
 function queryString(name) {
     let value = null;

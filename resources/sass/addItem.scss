@@ -1,0 +1,111 @@
+@import "configParam";
+main{
+    background-color: $main_bg_color;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    section{
+        display: flex;
+        flex-direction: column;
+        background-color: $navBar_bg_color;
+        padding: 40px;
+        border-radius: 20px;
+        border: 1px solid $navBar_color;
+        gap: 5vh;
+
+        h1, p, a{
+            text-align: center;
+        }
+
+        h1, p{
+            width: 100%;
+            text-align: center;
+            color: $navBar_color;
+        }
+
+        a{
+            width: 40%;
+            padding: 10px;
+            margin: 0 auto;
+            text-decoration: none;
+            background-color: black;
+            color: $navBar_color;
+            border: 1px solid $navBar_color;
+            border-radius: 10px;
+
+            &:hover{
+                background-color: $navBar_color;
+                color: black;
+            }
+        }
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        max-width: 600px;
+        padding: 40px;
+        border: 1px solid $navBar_color;
+        border-radius: 20px;
+        background-color: $navBar_bg_color;
+        
+        input, textarea, #urgencyContainer, select{
+            margin-bottom: 5vh;
+        }
+
+        label{
+            margin-bottom: 1vh;
+            color: $navBar_color;
+        }
+
+        input, textarea, select{
+            padding: 10px;
+            border: 1px solid $navBar_color;
+            border-radius: 10px;
+            background-color: black;
+        }
+
+        input, textarea{
+            color: $navBar_color;
+
+            &::placeholder{
+                color: darkgray;
+            }
+        }
+
+        select{
+            color: darkgray
+        }
+
+        #urgencyContainer{
+            display: flex;
+            align-items: center;
+            gap: 3vw;
+
+            input{
+                display: none;
+            }
+
+            button{
+                height: 15px;
+                width: 15px;
+                border-radius: 50%;
+                border: 1px solid $navBar_color;
+                background-color: black;
+
+                &.selected{
+                    background-color: $navBar_color;
+                }
+
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+
+        
+    }
+}
