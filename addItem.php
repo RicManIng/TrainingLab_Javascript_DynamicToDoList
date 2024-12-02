@@ -33,11 +33,36 @@
 
         if(isset($_POST['formComplete'])){
             /* manage the form completion and save params */
+            if ($state == 'edit'){
+                $task['name'] = $_POST['name'];
+                $task['description'] = $_POST['description'];
+                $task['type'] = $_POST['type'];
+                $task['urgency'] = intval($_POST['urgency']);
+                $task['updated_at'] = date('Y-m-d');
+                $taskArrays[$key_selected] = $task;
+                file_put_contents('./resources/database/task.json', json_encode($taskArrays, JSON_PRETTY_PRINT));
+                header('Location: home.php?selected=1');
+            } else if ($state == 'add'){
+                $task = [
+                    'id' => $taskArrays[count($taskArrays) - 1]['id'] + 1,
+                    'name' => $_POST['name'],
+                    'description' => $_POST['description'],
+                    'type' => $_POST['type'],
+                    'urgency' => intval($_POST['urgency']),
+                    'status' => 'pending',
+                    'created_at' => date('Y-m-d'),
+                    'updated_at' => date('Y-m-d'),
+                    'deleted_at' => null
+                ];
+                $taskArrays[] = $task;
+                file_put_contents('./resources/database/task.json', json_encode($taskArrays, JSON_PRETTY_PRINT));
+                header('Location: home.php?selected=1');
+            }
         }
 
         if ($state == 'delete'){
             /* if state == delete so change the state of the task into cancel and then go to home */
-            $task['state'] = 'cancelled';
+            $task['status'] = 'cancelled';
             $task['updated_at'] = date('Y-m-d');
             $task['deleted_at'] = date('Y-m-d');
             $taskArrays[$key_selected] = $task;
@@ -51,7 +76,7 @@
             $urgency = $task['urgency'];
         } else if ($state == 'complete') {
             /* if state == complete so change the state of the task into complete and then go to home */
-            $task['state'] = 'completed';
+            $task['status'] = 'completed';
             $task['updated_at'] = date('Y-m-d');
             $task['deleted_at'] = date('Y-m-d');
             $taskArrays[$key_selected] = $task;

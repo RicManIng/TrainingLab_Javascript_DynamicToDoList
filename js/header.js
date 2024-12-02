@@ -10,7 +10,6 @@ function queryString(name) {
         get: (searchParams, prop) => searchParams.has(prop) ? searchParams.get(prop) : null
     });
     value = params[name];
-    console.log(`Value of ${name}: ${value}`);
     return value;
 }
 

@@ -174,13 +174,17 @@ function createStandardView(taskArray) {
                     createTask(task);
                     counter++;
                 }
-                let button = document.createElement('button');
-                button.textContent = 'Show More';
-                button.classList.add('showMore');
-                button.addEventListener('click', function() {
-                    addTasksToMenu('pending', pendings);
-                });
-                taskContainer.appendChild(button);
+                let button = document.getElementById('showMorePending');
+                if(!button){
+                    let button = document.createElement('button');
+                    button.textContent = 'Show More';
+                    button.classList.add('showMore');
+                    button.id = 'showMorePending';
+                    button.addEventListener('click', function() {
+                        addTasksToMenu('pending', pendings);
+                    });
+                    taskContainer.appendChild(button);
+                }
             } else if (containerClass == 'completed') {
                 for (let task of completeds) {
                     if(counter == 5){
@@ -189,13 +193,17 @@ function createStandardView(taskArray) {
                     createTask(task);
                     counter++;
                 }
-                let button1 = document.createElement('button');
-                button1.textContent = 'Show More';
-                button1.classList.add('showMore');
-                button1.addEventListener('click', function() {
-                    addTasksToMenu('completed', completeds);
-                });
-                taskContainer.appendChild(button1);
+                let button1 = document.getElementById('showMoreCompleted');
+                if(!button1){
+                    let button1 = document.createElement('button');
+                    button1.textContent = 'Show More';
+                    button1.classList.add('showMore');
+                    button1.id = 'showMoreCompleted';
+                    button1.addEventListener('click', function() {
+                        addTasksToMenu('completed', completeds);
+                    });
+                    taskContainer.appendChild(button1);
+                }
             } else if (containerClass == 'cancelled') {
                 for (let task of cancelleds) {
                     if(counter == 5){
@@ -204,13 +212,17 @@ function createStandardView(taskArray) {
                     createTask(task);
                     counter++;
                 }
-                let button2 = document.createElement('button');
-                button2.textContent = 'Show More';
-                button2.classList.add('showMore');
-                button2.addEventListener('click', function() {
-                    addTasksToMenu('cancelled', cancelleds);
-                });
-                taskContainer.appendChild(button2);
+                let button2 = document.getElementById('showMoreCancelled');
+                if(!button2){
+                    let button2 = document.createElement('button');
+                    button2.textContent = 'Show More';
+                    button2.classList.add('showMore');
+                    button2.id = 'showMoreCancelled';
+                    button2.addEventListener('click', function() {
+                        addTasksToMenu('cancelled', cancelleds);
+                    });
+                    taskContainer.appendChild(button2);
+                }
             }
         }
     }

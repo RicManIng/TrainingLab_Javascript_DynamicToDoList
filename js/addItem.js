@@ -96,6 +96,22 @@ function createSelectOptions(taskTypes, task){
     });
 }
 
+function checkFormStatus(){
+    let name = document.querySelector('#name').value;
+    let description = document.querySelector('#description').value;
+    let type = document.querySelector('#type').value;
+    let urgency = document.querySelector('#urgency').value;
+    let submit = document.querySelector('#submit');
+
+    if (name != '' && description != '' && type != '' && urgency != '' && description.replace(/\s/g, '').length >= 20){
+        submit.disabled = false;
+    } else {
+        submit.disabled = true;
+    }
+
+    console.log(`Name: ${name}, Description: ${description}, Type: ${type}, Urgency: ${urgency}, Submit: ${submit.disabled}`);
+}
+
 
 
 
@@ -115,14 +131,20 @@ window.onload = async function(){
     createSelectOptions(taskTypes, task);
 
     let descriptionElt = document.querySelector('#description');
-    descriptionElt.addEventListener('keyup', checkDescriptionLenght);
+    descriptionElt.addEventListener('keyup', descriptionElt => {
+        checkDescriptionLenght(descriptionElt);
+        checkFormStatus();
+    });
 
     let selectElt = document.querySelector('#type');
     let selectValue = selectElt.value;
     if (selectValue != ''){
         selectElt.classList.add('full');
     }
-    selectElt.addEventListener('change', correctTypeStyle);
+    selectElt.addEventListener('change', selectElt => {
+        correctTypeStyle(selectElt);
+        checkFormStatus();
+    });
 
     let urgencyButtonsArray = document.querySelectorAll('.urgency');
     urgencyButtonsArray.forEach(urgencyButton => {
@@ -130,6 +152,9 @@ window.onload = async function(){
         urgencyButton.addEventListener('click', function(){
             task.urgency = urgencyButton.id;
             loadUrgency(task.urgency);
+            let urgency = document.querySelector('#urgency');
+            urgency.value = task.urgency;
+            checkFormStatus();
         });
         urgencyButton.addEventListener('mouseleave', function(){
             urgencyLeaveEffect();
@@ -137,5 +162,11 @@ window.onload = async function(){
         });
     });
 
+    let nameElt = document.querySelector('#name');
+    nameElt.addEventListener('blur', function(){
+        checkFormStatus();
+    });
+
     loadUrgency(task.urgency);
+    checkFormStatus();
 }
